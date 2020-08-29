@@ -1,6 +1,9 @@
 import json
 import sys
 
+import numpy as np
+import pandas as pd
+
 def load_json_tweets(filepath):
     tweets = json.load(open(filepath))
     return tweets
@@ -25,6 +28,12 @@ def to_just_text(tweets, filepath="tweets.txt"):
         for tweet in tweets:
             #Linebreaks are replaced so we have one tweet per line.
             f.write("%s\n" % tweet['full_text'].replace("\n", " ").replace("\r", " "))
+
+def to_pd_dataframe(tweets):
+    df = pd.DataFrame(np.empty(len(tweets)).astype(str), columns=['tweet'])
+    for idx, tweet in enumerate(tweets):
+        df.iloc[idx]['tweet'] = tweet['full_text'].replace("\n", " ").replace("\r", " ")
+    return df
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:

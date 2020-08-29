@@ -4,7 +4,7 @@ import time
 from twython import Twython, TwythonError, TwythonRateLimitError
 
 from twitter_auth import *
-import tweets_json
+from tweets_json import to_pd_dataframe
 
 def search_twitter(search_term, limit):
     #Authorize use of Twitter API with supplied credentials (from twitter_auth).
@@ -16,7 +16,7 @@ def search_twitter(search_term, limit):
         #count=100 is the maximum allowed
         #tweet_mode="extended" allows for full text tweets, rather than truncated (i.e. over 140 chars)
         #https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets.html
-        search_results = twitter.search(q=search_term,tweet_mode="extended",count=limit)
+        search_results = twitter.search(q=search_term,tweet_mode="extended",count=limit, result_type="popular")
         tweets.extend(search_results['statuses'])
         #save the id of the oldest tweet less one, this is the starting point for collecting further tweets.
         oldest = tweets[-1]['id'] - 1
@@ -46,12 +46,17 @@ def search_twitter(search_term, limit):
     return tweets[:limit]
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print("Usage: %s search_term limit" % sys.argv[0])
-        sys.exit (1)
+    # if len(sys.argv) != 4:
+    #     print("Usage: %s search_term limit" % sys.argv[0])
+    #     sys.exit (1)
 
     search_term = sys.argv[1]
     limit = int(sys.argv[2])
-    filepath = sys.argv[3]
+    # filepath = sys.argv[3]
     tweets = search_twitter(search_term, limit)
-    tweets_json.to_just_text(tweets, filepath=filepath)
+
+    # Transform into dataframe
+    tweets_df = to_pd_dataframe(tweets)
+
+    # 
+
