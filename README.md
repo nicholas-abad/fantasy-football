@@ -1,5 +1,7 @@
 # Idea
 1. Perform sentiment analysis during the off-season and pre-season to see how a player is performing before the draft occurs
+  - Sentiment analysis based on Reddit fantasy football subreddit
+  - Sentiment analysis based on Twitter pre-season performances
 2. Use historical data to generate a prediction of how these players will perform this season
 3. Use other websites (i.e. ESPN, WalterFootball, etc.) and put these auction values into XGBoost?
 4. Plug these outputs into a neural network for a final prediction
