@@ -34,8 +34,14 @@ def to_just_text(tweets, filepath="tweets.txt"):
             f.write("%s\n" % tweet["full_text"].replace("\n", " ").replace("\r", " "))
 
 
-def to_pd_dataframe(tweets):
-    df = pd.DataFrame(np.empty(len(tweets)).astype(str), columns=["tweet"])
-    for idx, tweet in enumerate(tweets):
+def to_pd_dataframe(
+    relevant_tweets, relevant_tweets_num_retweets, relevant_tweets_num_favorites
+):
+    df = pd.DataFrame(np.empty(len(relevant_tweets)).astype(str), columns=["tweet"])
+    for idx, tweet in enumerate(relevant_tweets):
         df.iloc[idx]["tweet"] = tweet["full_text"].replace("\n", " ").replace("\r", " ")
+    df["num_retweets"] = relevant_tweets_num_retweets
+    df["num_favorites"] = relevant_tweets_num_favorites
+    df = df.drop_duplicates()
+
     return df
