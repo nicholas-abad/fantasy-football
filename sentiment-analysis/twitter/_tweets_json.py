@@ -39,14 +39,3 @@ def to_pd_dataframe(tweets):
     for idx, tweet in enumerate(tweets):
         df.iloc[idx]["tweet"] = tweet["full_text"].replace("\n", " ").replace("\r", " ")
     return df
-
-
-if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: %s filepath outfile" % sys.argv[0])
-        sys.exit(1)
-
-    filepath = sys.argv[1]
-    outfile = sys.argv[2]
-    tweets = load_json_tweets(filepath)
-    to_just_text(tweets, filepath="%s" % outfile)

@@ -2,3 +2,8 @@ sentiment-analysis/reddit/.ipynb_checkpoints/*
 sentiment-analysis/reddit/output/*
 sentiment-analysis/reddit/*.ipynb
 
+sentiment-analysis/twitter/__pycache__/*
+sentiment-analysis/twitter/output/*
+sentiment-analysis/twitter/*.ipynb
+sentiment-analysis/twitter/*.json
+sentiment-analysis/twitter/*.txt
