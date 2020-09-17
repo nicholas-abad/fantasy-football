@@ -32,7 +32,9 @@ from tqdm import tqdm
 
 import praw
 
-parser = argparse.ArgumentParser(description="Define the arguments in the create_json.py file.")
+parser = argparse.ArgumentParser(
+    description="Define the arguments in the create_json.py file."
+)
 parser.add_argument(
     "--subreddit",
     action="store",
@@ -108,7 +110,9 @@ def generate_json_file(
 
     ff_dict = {}
 
-    print(f"Now creating the dictionary, which will contain {num_submissions} posts from the {subreddit} subreddit.")
+    print(
+        f"Now creating the dictionary, which will contain {num_submissions} posts from the {subreddit} subreddit."
+    )
     print(f"This will be saved in the folder {json_output_dir}.")
     print(f"Creating dictionary...")
     for submission in tqdm(top_subreddit_submissions):

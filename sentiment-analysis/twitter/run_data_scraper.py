@@ -7,7 +7,9 @@ import subprocess
 from tqdm import tqdm
 import pandas as pd
 
-parser = argparse.ArgumentParser(description="Run the entire data scraper for all players.")
+parser = argparse.ArgumentParser(
+    description="Run the entire data scraper for all players."
+)
 parser.add_argument(
     "--path_to_dataset",
     action="store",
@@ -30,6 +32,7 @@ args = parser.parse_args()
 path_to_dataset = args.path_to_dataset
 output_dir = args.output_dir
 
+
 def main(path_to_dataset, output_dir):
     column_name_of_all_players = "player_names"
     data = pd.read_csv(path_to_dataset, index_col=0)
@@ -37,7 +40,16 @@ def main(path_to_dataset, output_dir):
 
     # Execute gather_tweets.py for every player.
     for player in tqdm(names_of_players):
-        subprocess.run(["python", "gather_tweets.py", "--search_term", f"{player}", "--output_dir", f"{output_dir}"])
+        subprocess.run(
+            [
+                "python",
+                "gather_tweets.py",
+                "--search_term",
+                f"{player}",
+                "--output_dir",
+                f"{output_dir}",
+            ]
+        )
 
 
 if __name__ == "__main__":

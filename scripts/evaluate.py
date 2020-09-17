@@ -32,12 +32,19 @@ args = parser.parse_args()
 path_to_actual_results = args.path_to_actual_results
 path_to_accumulated_results = args.path_to_accumulated_results
 
-def evaluate_dataset(path_to_actual_results, path_to_accumulated_results, actual_results_index_col=0):
-    actual_data = pd.read_csv(path_to_actual_results, index_col=actual_results_index_col)
+
+def evaluate_dataset(
+    path_to_actual_results, path_to_accumulated_results, actual_results_index_col=0
+):
+    actual_data = pd.read_csv(
+        path_to_actual_results, index_col=actual_results_index_col
+    )
     accumulated_data = pd.read_csv(path_to_accumulated_results)
 
-    data = pd.merge(actual_data, accumulated_data, left_on="player_names", right_on="Player_Names").drop("Player_Names", axis=1)
-    data = data[data['keepers'] != True].drop("keepers", axis=1)
+    data = pd.merge(
+        actual_data, accumulated_data, left_on="player_names", right_on="Player_Names"
+    ).drop("Player_Names", axis=1)
+    data = data[data["keepers"] != True].drop("keepers", axis=1)
 
     for model in [DecisionTreeRegressor(), RandomForestRegressor(), XGBRegressor()]:
         # Decision Trees
@@ -45,7 +52,11 @@ def evaluate_dataset(path_to_actual_results, path_to_accumulated_results, actual
         mae = []
         r2 = []
         for i in tqdm(range(10)):
-            xtrain, xtest, ytrain, ytest = train_test_split(data.drop(["player_names", "bid_amounts"], axis=1), data["bid_amounts"], test_size=0.20)
+            xtrain, xtest, ytrain, ytest = train_test_split(
+                data.drop(["player_names", "bid_amounts"], axis=1),
+                data["bid_amounts"],
+                test_size=0.20,
+            )
             model.fit(xtrain, ytrain)
             predictions = model.predict(xtest)
             mse.append(mean_squared_error(predictions, ytest))
@@ -55,6 +66,7 @@ def evaluate_dataset(path_to_actual_results, path_to_accumulated_results, actual
         print(f"MSE: {np.mean(mse)}")
         print(f"MAE: {np.mean(mae)}")
         print(f"R2: {np.mean(r2)}")
+
 
 if __name__ == "__main__":
     evaluate_dataset(path_to_actual_results, path_to_accumulated_results)

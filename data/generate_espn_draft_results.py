@@ -5,9 +5,9 @@ import os
 espn_s2 = os.getenv("ESPN_S2")
 swid = os.getenv("ESPN_SWID")
 
-print('Authenticating...')
+print("Authenticating...")
 league = League(league_id=368028, year=2020, espn_s2=espn_s2, swid=swid)
-print('Successfully Authenticated!')
+print("Successfully Authenticated!")
 
 
 def create_csv(output_filename):
@@ -19,10 +19,11 @@ def create_csv(output_filename):
 
     df = pd.DataFrame(
         list(zip(player_names, bid_amounts, keepers, round_num, round_pick)),
-        columns=["player_names", "bid_amounts", "keepers", "round_num", "round_pick"]
+        columns=["player_names", "bid_amounts", "keepers", "round_num", "round_pick"],
     )
 
     df.to_csv(output_filename)
+
 
 if __name__ == "__main__":
     create_csv("./2020_espn_draft_results.csv")
