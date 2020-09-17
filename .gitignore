@@ -8,3 +8,5 @@ sentiment-analysis/twitter/*.ipynb
 sentiment-analysis/twitter/*.json
 sentiment-analysis/twitter/*.txt
 sentiment-analysis/twitter/.ipynb_checkpoints/*
+
+.ipynb_checkpoints/*
