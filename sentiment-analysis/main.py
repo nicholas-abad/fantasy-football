@@ -36,6 +36,7 @@ def _get_sentiment_analysis_on_dataframe(path_to_tweets):
     player_tweets_df = player_tweets_df.reset_index()
     sentiment = []
     for idx, row in player_tweets_df.iterrows():
+        print('Row: ', row)
         sentiment.append(_get_tweet_sentiment(row["tweet"]))
     num_tweets = player_tweets_df.shape[0]
     return np.mean(sentiment), num_tweets
