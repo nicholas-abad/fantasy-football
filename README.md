@@ -8,3 +8,5 @@
 4. Plug these outputs into a neural network for a final prediction
     - First, I want to predict average draft rankings but this is quite subjective
     - Two, I want to predict what their draft auction value will be.
+
+awdahsdawdhawdh
