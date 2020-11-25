@@ -10,6 +10,5 @@
     - Two, I want to predict what their draft auction value will be.
 
 # Initial Results (after Twitter Sentiment Analysis and Madden Ratings)
+### Most Important Features
 <img src="assets/initial_results.png">
-
-testing 
